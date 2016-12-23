@@ -13,11 +13,11 @@ namespace :nginx do
     # queue! %[sudo sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger precise main > /etc/apt/sources.list.d/passenger.list']
     command %[sudo apt-get update]
     command %[sudo apt-get install -y nginx-extras passenger]
-    command %[echo '-------------------------------------------------------->>>']
-    command %[echo "edit /etc/nginx/nginx.conf and uncomment passenger_root and passenger_ruby. For example, you may see this:"]
-    command %[echo "# passenger_root /some-filename/locations.ini;"]
-    command %[echo "# passenger_ruby /usr/bin/passenger_free_ruby;"]
-    command %[echo '-------------------------------------------------------->>>']
+    comment %['-------------------------------------------------------->>>']
+    comment %["edit /etc/nginx/nginx.conf and uncomment passenger_root and passenger_ruby. For example, you may see this:"]
+    comment %["# passenger_root /some-filename/locations.ini;"]
+    commment %["# passenger_ruby /usr/bin/passenger_free_ruby;"]
+    comment %[ '-------------------------------------------------------->>>']
   end
 
   desc "Setup nginx configuration for this application"

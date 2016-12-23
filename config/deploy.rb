@@ -43,23 +43,23 @@ task :setup => :environment do
   command %[touch "#{fetch(:shared_files)}/config/database.yml"]
   invoke :setup_prerequesties
   invoke :setup_yml
-  comment %[echo "-----> Be sure to edit 'shared/config/*.yml files'."]
+  comment %["-----> Be sure to edit 'shared/config/*.yml files'."]
 
 end
 
 task :setup_prerequesties => :environment do
-  command 'echo "-----> Installing development dependencies"'
+  comment "-----> Installing development dependencies"
   [
       'python-software-properties', 'libmysqlclient-dev', 'imagemagick', 'libmagickwand-dev', 'nodejs',
       'build-essential', 'zlib1g-dev', 'libssl-dev', 'libreadline-dev', 'libyaml-dev', 'libcurl4-openssl-dev', 'curl',
       'git-core', 'make', 'gcc', 'g++', 'pkg-config', 'libfuse-dev', 'libxml2-dev', 'zip', 'libtool',
       'xvfb', 'mysql-client', 'mysql-server', 'mime-support', 'automake'
   ].each do |package|
-    puts "Installing #{package}"
+    comment "Installing #{package}"
     command %[sudo -A apt-get install -y #{package}]
   end
 
-  comment 'echo "-----> Installing Ruby Version Manager"'
+  comment "-----> Installing Ruby Version Manager"
   command %[command curl -sSL https://rvm.io/mpapis.asc | gpg --import]
   command %[curl -sSL https://get.rvm.io | bash -s stable --ruby]
 
