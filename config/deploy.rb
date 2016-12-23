@@ -15,9 +15,6 @@ set :deploy_to, "/home/#{fetch(:user)}/#{fetch(:application)}"
 set :repository, repository_url
 set :branch, set_branch
 set :rvm_path, '/usr/local/rvm/scripts/rvm'
-set :sheet_name, 'Product deployment status'
-set :work_sheet_name, 'Salak'
-set :work_sheet_name, 'Salak'
 
 set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml')
 set :ruby_version, "#{File.readlines(File.join(__dir__, '..', '.ruby-version')).first.strip}"
