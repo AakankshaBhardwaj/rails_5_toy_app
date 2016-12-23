@@ -5,7 +5,7 @@ require 'mina/rvm' # for rvm support. (http://rvm.io)
 require 'yaml'
 require 'io/console'
 
-['base', 'nginx', 'mysql', 'check', 'crontab'].each do |pkg|
+['base', 'nginx', 'mysql', 'check'].each do |pkg|
   require "#{File.join(__dir__, 'recipes', "#{pkg}")}"
 end
 
@@ -127,7 +127,7 @@ end
 desc 'Restart passenger server'
 task :restart => :environment do
   invoke :set_sudo_password
-  invoke :'crontab:install'
+  # invoke :'crontab:install'
   command %[sudo -A service nginx restart]
   comment 'echo "-----> Start Passenger"'
   command %[mkdir -p #{File.join(fetch(:current_path), 'tmp')}]
