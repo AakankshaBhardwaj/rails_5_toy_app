@@ -24,7 +24,7 @@ set :gemset, "#{File.readlines(File.join(__dir__, '..', '.ruby-gemset')).first.s
 
 task :environment do
   set :rails_env, ENV['on'].to_sym unless ENV['on'].nil?
-  require "#{File.join(__dir__, 'deploy', "#{fetch(:rails_env)}_configurations_files", "#{fetch(:rails_env)}.rb")}"
+  require "#{File.join(__dir__, 'deploy', "#{staging_configurations_files}", "staging.rb")}"
   invoke :'rvm:use', "ruby-#{fetch(:ruby_version)}@#{fetch(:gemset)}"
 end
 task :setup => :environment do
