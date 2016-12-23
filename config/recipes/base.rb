@@ -20,9 +20,5 @@ def ask_sudo
 end
 
 def repository_url
-  STDOUT.print "\nAssembla's Git Username: "
-  _user_name = STDIN.gets.strip
-  STDOUT.print "\nAssembla's Git Password: "
-  _password = STDIN.noecho(&:gets).strip
-   "https://#{_user_name}:#{_password}@git.assembla.com/papayaheaderlabs.Salak.git"
+  "https://github.com/AakankshaBhardwaj/rails_5_toy_app.git"
 end
