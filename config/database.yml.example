@@ -27,4 +27,4 @@ staging:
 
 production:
   <<: *default
-  database: salak_production
+  database: toy_app_production
