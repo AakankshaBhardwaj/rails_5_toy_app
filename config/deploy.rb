@@ -43,12 +43,12 @@ task :setup => :environment do
   command %[touch "#{fetch(:shared_files)}/config/database.yml"]
   invoke :setup_prerequesties
   invoke :setup_yml
-  comment %["-----> Be sure to edit 'shared/config/*.yml files'."]
+  # comment %["-----> Be sure to edit 'shared/config/*.yml files'."]
 
 end
 
 task :setup_prerequesties => :environment do
-  comment "-----> Installing development dependencies"
+  # comment "-----> Installing development dependencies"
   [
       'python-software-properties', 'libmysqlclient-dev', 'imagemagick', 'libmagickwand-dev', 'nodejs',
       'build-essential', 'zlib1g-dev', 'libssl-dev', 'libreadline-dev', 'libyaml-dev', 'libcurl4-openssl-dev', 'curl',
@@ -59,7 +59,7 @@ task :setup_prerequesties => :environment do
     command %[sudo -A apt-get install -y #{package}]
   end
 
-  comment "-----> Installing Ruby Version Manager"
+  # comment "-----> Installing Ruby Version Manager"
   command %[command curl -sSL https://rvm.io/mpapis.asc | gpg --import]
   command %[curl -sSL https://get.rvm.io | bash -s stable --ruby]
 
@@ -127,7 +127,7 @@ task :restart => :environment do
   invoke :set_sudo_password
   # invoke :'crontab:install'
   command %[sudo -A service nginx restart]
-  comment 'echo "-----> Start Passenger"'
+  comment "----------------------------- Start Passenger"
   command %[mkdir -p #{File.join(fetch(:current_path), 'tmp')}]
   command %[touch #{File.join(fetch(:current_path), 'tmp', 'restart.txt')}]
   # invoke :'product_deployment_sheet:update'
