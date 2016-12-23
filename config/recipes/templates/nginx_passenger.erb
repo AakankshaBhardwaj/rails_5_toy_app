@@ -15,7 +15,7 @@
     # Enabling passenger for application
     passenger_enabled on;
     # Rails environment for application
-    passenger_app_env <%= fetch(:rails_env).to_s %>;
+    passenger_app_env <%= "staging".to_s %>;
 
 
     # Applications root
@@ -49,9 +49,9 @@
     listen [::]:80 default_server;
     server_name _;
     passenger_enabled on;
-    passenger_app_env <%= rails_env.to_s %>;
+    passenger_app_env <%= "staging".to_s %>;
 
-    root <%= deploy_to %>/current/public;
+    root <%= fetch(:deploy_to) %>/current/public;
 
     location ^~ /assets/ {
     gzip_static on;

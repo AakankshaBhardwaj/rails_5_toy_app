@@ -9,13 +9,14 @@ require 'io/console'
   require "#{File.join(__dir__, 'recipes', "#{pkg}")}"
 end
 
-set :application, 'Salak'
+set :application, 'toy_app'
 set :user, 'deploy'
 set :deploy_to, "/home/#{fetch(:user)}/#{fetch(:application)}"
 set :repository, repository_url
 set :branch, set_branch
 set :rvm_path, '/usr/local/rvm/scripts/rvm'
 set :sheet_name, 'Product deployment status'
+set :work_sheet_name, 'Salak'
 set :work_sheet_name, 'Salak'
 
 set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml')
@@ -24,7 +25,7 @@ set :gemset, "#{File.readlines(File.join(__dir__, '..', '.ruby-gemset')).first.s
 
 task :environment do
   set :rails_env, ENV['on'].to_sym unless ENV['on'].nil?
-  require "#{File.join(__dir__, 'deploy', "#{staging_configurations_files}", "staging.rb")}"
+  require "#{File.join(__dir__, 'deploy', "staging_configurations_files", "staging.rb")}"
   invoke :'rvm:use', "ruby-#{fetch(:ruby_version)}@#{fetch(:gemset)}"
 end
 task :setup => :environment do
@@ -80,15 +81,15 @@ task :setup_prerequesties => :environment do
 
 end
 # SSL certificates path
-set :cert_path, "#{fetch(:deploy_to)}/current/certs/SSL.crt"
-set :cert_key_path, "#{fetch(:deploy_to)}/current/certs/socialmatic.key"
+# set :cert_path, "#{fetch(:deploy_to)}/current/certs/SSL.crt"
+# set :cert_key_path, "#{fetch(:deploy_to)}/current/certs/socialmatic.key"
 
 task :setup_yml => :environment do
   # invoke :set_sudo_password
   Dir[File.join(__dir__, '*.yml.example')].each do |_path|
     command %[echo "#{erb _path}" > "#{File.join(fetch(:deploy_to), 'shared/config', File.basename(_path, '.yml.example') +'.yml')}"]
   end
-end
+ends
 
 desc "Deploys the current version to the server."
 task :deploy => :environment do
@@ -118,7 +119,7 @@ end
 
 task :set_sudo_password => :environment do
   set :sudo_password, ask_sudo
-  command "echo '#{erb(File.join(__dir__, 'deploy', "#{fetch(:rails_env)}_configurations_files", 'sudo_password.erb'))}' > /home/#{fetch(:user)}/SudoPass.sh"
+  command "echo '#{erb(File.join(__dir__, 'deploy', "staging_configurations_files", 'sudo_password.erb'))}' > /home/#{fetch(:user)}/SudoPass.sh"
   command "chmod +x /home/#{fetch(:user)}/SudoPass.sh"
   command "export SUDO_ASKPASS=/home/#{fetch(:user)}/SudoPass.sh"
 end

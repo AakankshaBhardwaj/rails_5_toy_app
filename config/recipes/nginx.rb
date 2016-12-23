@@ -22,7 +22,7 @@ namespace :nginx do
 
   desc "Setup nginx configuration for this application"
   task :setup => :environment do
-    command %[sudo -A su -c "echo '#{erb(File.join(__dir__, 'templates', 'nginx_passenger.erb'))}' > /etc/nginx/sites-enabled/#{fetch(:application)}"]
+    command %[sudo -A su -c "echo '#{erb(File.join(__dir__, 'templates', 'nginx_passenger.erb'))}' > /etc/nginx/sites-enabled/toy_app}"]
     command %[sudo -A rm -f /etc/nginx/sites-enabled/default]
   end
 
