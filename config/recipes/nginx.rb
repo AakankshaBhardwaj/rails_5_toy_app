@@ -16,7 +16,7 @@ namespace :nginx do
     comment %['-------------------------------------------------------->>>']
     comment %["edit /etc/nginx/nginx.conf and uncomment passenger_root and passenger_ruby. For example, you may see this:"]
     comment %["# passenger_root /some-filename/locations.ini;"]
-    commment %["# passenger_ruby /usr/bin/passenger_free_ruby;"]
+    comment %["# passenger_ruby /usr/bin/passenger_free_ruby;"]
     comment %[ '-------------------------------------------------------->>>']
   end
 
