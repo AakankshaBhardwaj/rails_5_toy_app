@@ -34,7 +34,7 @@ task :setup => :environment do
   command %[chmod g+rx,u+rwx "#{fetch(:shared_files)}/log"]
 
   command %[mkdir -p "#{fetch(:shared_files)}/config"]
-  command %[chmod g+rx,u+rwx "#{fetch(:shared_path)}/config"]
+  command %[chmod g+rx,u+rwx "#{fetch(:shared_files)}/config"]
 
   # creating ebay config yml it will be sym-linked to current/ebay_ymls
   command %[mkdir -p "#{fetch(:shared_files)}/ebay_ymls"]
@@ -89,7 +89,7 @@ task :setup_yml => :environment do
   Dir[File.join(__dir__, '*.yml.example')].each do |_path|
     command %[echo "#{erb _path}" > "#{File.join(fetch(:deploy_to), 'shared/config', File.basename(_path, '.yml.example') +'.yml')}"]
   end
-ends
+end
 
 desc "Deploys the current version to the server."
 task :deploy => :environment do
