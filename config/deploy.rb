@@ -27,20 +27,16 @@ task :environment do
 end
 task :setup => :environment do
   invoke :set_sudo_password
-  command %[mkdir -p "#{fetch(:shared_files)}/log"]
-  command %[chmod g+rx,u+rwx "#{fetch(:shared_files)}/log"]
+  command %[mkdir -p "#{fetch(:shared_dir)}/log"]
+  command %[chmod g+rx,u+rwx "#{fetch(:shared_dir)}/log"]
 
-  command %[mkdir -p "#{fetch(:shared_files)}/config"]
-  command %[chmod g+rx,u+rwx "#{fetch(:shared_files)}/config"]
+  command %[mkdir -p "#{fetch(:shared_dir)}/config"]
+  command %[chmod g+rx,u+rwx "#{fetch(:shared_dir)}/config"]
+  
+  command %[mkdir -p "#{fetch(:shared_dir)}/tmp/pids"]
+  command %[chmod g+rx,u+rwx "#{fetch(:shared_dir)}/tmp/pids"]
 
-  # creating ebay config yml it will be sym-linked to current/ebay_ymls
-  command %[mkdir -p "#{fetch(:shared_files)}/ebay_ymls"]
-  command %[chmod g+rx,u+rwx "#{fetch(:shared_files)}/ebay_ymls"]
-
-  command %[mkdir -p "#{fetch(:shared_files)}/tmp/pids"]
-  command %[chmod g+rx,u+rwx "#{fetch(:shared_files)}/tmp/pids"]
-
-  command %[touch "#{fetch(:shared_files)}/config/database.yml"]
+  command %[touch "#{fetch(:shared_dir)}/config/database.yml"]
   invoke :setup_prerequesties
   invoke :setup_yml
   # comment %["-----> Be sure to edit 'shared/config/*.yml files'."]
